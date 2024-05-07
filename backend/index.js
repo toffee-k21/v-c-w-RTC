@@ -30,6 +30,11 @@ io.on("connection", socket =>{//connection toh predefined hogi
         const socketId = emailToSocketMapping.get(emailId);//ye wla jisne join kiya bd me ushka hai..kuki ye email laya gya hai data k through
         socket.to(socketId).emit("incoming-call",{from: fromEmail, offer})
     })
+    socket.on("call-accepted",(data)=>{
+        const {emailId,ans} = data;
+        const socketId = emailToSocketMapping.get(emailId);
+        socket.to(socketId).emit('call-accepted', ans)
+    })
 })
 
 app.get("/",(req,res)=>{

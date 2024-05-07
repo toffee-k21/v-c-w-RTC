@@ -18,6 +18,7 @@ navigate("/room/"+roomId)
 
 useEffect(()=>{
 socket.on("joined-room",(data)=>handleJoin(data))
+// return socket.off("joined-room",(data)=>handleJoin(data))//bar baar na call kr de isliye
 },[])
 
   return (

@@ -27,7 +27,18 @@ export const PeerProvider = (props)=>{
         //this funtion will create offer and retun it and also store its info
     }
 
-return <PeerContext.Provider value={{Peer, createOffer}}>
+    const createAnswer = async (offer)=>{
+        await Peer.setRemoteDescription(offer);
+        const answer = await Peer.createAnswer();
+        await Peer.setLocalDescription(answer);//ye basically khud ka sdp hai jo dusre wale ne store kara
+        return answer;
+    }
+
+    const setRemoteAns = async (ans)=>{
+        await Peer.setRemoteDescription(ans);
+    }
+
+return <PeerContext.Provider value={{Peer, createOffer , createAnswer, setRemoteAns}}>
     {props.children}
 </PeerContext.Provider>
 }
