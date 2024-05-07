@@ -38,7 +38,14 @@ export const PeerProvider = (props)=>{
         await Peer.setRemoteDescription(ans);
     }
 
-return <PeerContext.Provider value={{Peer, createOffer , createAnswer, setRemoteAns}}>
+    const sendStream = async ( stream )=>{
+const tracks = stream.getTracks();
+for (const track of tracks ){
+    Peer.addTrack(track, stream);
+}
+    }
+
+return <PeerContext.Provider value={{Peer, createOffer , createAnswer, setRemoteAns,  sendStream}}>
     {props.children}
 </PeerContext.Provider>
 }
